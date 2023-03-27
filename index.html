@@ -1,6 +1,28 @@
 <!DOCTYPE html>
-<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 <title>Wheel Model</title>
 <html lang="en">
-  <head></head>
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <form id="form">
+      <div>
+        <label for="velocity">Velocity</label>
+        <input type="number" name="velocity" placeholder="miles per hour">
+      </div>
+      <div>
+        <label for="tire_diameter">Tire Diameter</label>
+        <input type="number" name="tire_diameter" placeholder="inches"><br>
+      </div>
+      <input type="submit" value="Submit">
+      <input type="button" id="settings" class="settings" value="Apply Configurations">
+    </form>
+    <div>
+      <button type=button id="startBtn" class="start">Start Spinning</button>
+      <button id="stopBtn">Stop Spinning</button>
+    </div>
+    <img id="wheel" src="C:\Users\Ruiku\Desktop\Folders\Coding\GitHub\wheel_model\2006ToyotaCamryHubCap.png" alt="image didn't load">
+    
+    <script src="main.js"></script>
+  </body>
 </html>
