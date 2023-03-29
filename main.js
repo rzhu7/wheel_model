@@ -1,35 +1,30 @@
 /* IF SOMETHING DOES NOT COMPILE PROPERLY THE WHOLE DOCUMENT DOES NOT RUN. IF A CONST STYLESHEET SENTENCE DOES NOT
 WORK THEN THE REST OF THE DOCUMENT IS JUST STUCK*/
+/*note that even if we are using one function at the bottom of the js doc while the rest of the functions
+arent used by the html at all 
+IT IS STILL STUCK BC THE COMPILER JUST GETS STUCK THERE OR SMTH SO FRICKING EVERY SINGLE PART OF UR JS
+CODE NEEDS TO BE WORKING BEFORE ANYTHING WILL WORK
+*/  
+
+
 
 
 let image = document.getElementById("wheel");
 let startBtn = document.getElementById("startBtn");
 let stopBtn = document.getElementById("stopBtn");
-let settingsBtn = document.getElementById("settings");
 let form = document.getElementById("form");
+let submitBtn = document.getElementById("submit");
 let tireDiameter;
 let velocity;
+let wheel;
 
 
-function fetchcall() {
-  let data = new FormData(form);
-  fetch("config.php", { method: "POST", body: data })
-  .then((result) => {
-    //if (result.status != 200) { throw new Error("Bad Server Response")}
-    alert("hi")
-    return result.text();
-  })
-  .then((text) => alert("hi"))
-  .catch(err => console.error(err));
-  return false;
-}
-
-
-function Wheel (tireDiameter, velocity) {
+function Wheel(tireDiameter, velocity) {
   let hubDiameter; 
   this.tireDiameter = tireDiameter; //in
   this.velocity = velocity; //mph
 }
+
 
 function calculateVelocity(wheel) {
   const inchesPerMile = 63360;
@@ -39,6 +34,7 @@ function calculateVelocity(wheel) {
   let secondsPerRotation = circumference / velocity;
   return secondsPerRotation
 }
+
 
 function changeSpin(secondsPerRotation) {
   let stylesheet = document.createElement('style');
@@ -56,31 +52,42 @@ function changeSpin(secondsPerRotation) {
   document.body.appendChild(stylesheet);  
 }
 
-form.addEventListener("submit", fetchcall());
 
-settingsBtn.onclick = function() {
-  let wheel = new Wheel(tireDiameter, velocity);
-  secondsPerRotation = calculateVelocity(wheel);
-  changeSpin(secondsPerRotation);
+submitBtn.onclick = () => {
+  tireDiameter = document.getElementById("tire_diameter").value;
+  velocity = document.getElementById("velocity").value;
+  document.getElementById("tire_diameter").value = document.getElementById("tire_diameter").placeholder;
+  document.getElementById("velocity").value = document.getElementById("velocity").placeholder;
+
+  /*
+  
+
+//NOTES REMEMBER TO ADD THIS LIKE SIGN THING THAT SAYS:
+tirediamter:
+velocity :
+
+  */
+  if (tireDiameter.length === 0 || velocity.length === 0) {
+    alert("no values given");
+  }
+  else {
+    startBtn.disabled = false;
+    wheel = new Wheel(tireDiameter, velocity);
+  }
 }
 
-startBtn.onclick = function () {
-    image.classList.add("spin");
+
+startBtn.onclick = () => {
+  startBtn.disabled = true;
+  secsPerRotation = calculateVelocity(wheel);
+  changeSpin(secsPerRotation);
+  image.classList.add("spin");
+  stopBtn.disabled = false;
 } 
 
+
 stopBtn.onclick = function() {
+  stopBtn.disabled = true;
   image.classList.remove("spin");
+  startBtn.disabled = false;
 }
-
-
-
-
-/*
-function processForm() {
-
-  tireDiameter = document.getElementById("form").elements[1].value;
-  velocity = document.getElementById("form").elements[3].value;
-  alert(tireDiameter)
-  
-}
-*/

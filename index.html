@@ -7,19 +7,20 @@
   <body>
     <form id="form">
       <div>
-        <label for="velocity">Velocity</label>
-        <input type="number" name="velocity" placeholder="miles per hour">
+        <label for="tire_diameter">Tire Diameter</label>
+        <input  id="tire_diameter" name="tire_diameter" type="number" placeholder="inches"><br>
       </div>
       <div>
-        <label for="tire_diameter">Tire Diameter</label>
-        <input type="number" name="tire_diameter" placeholder="inches"><br>
+        <label for="velocity">Velocity</label>
+        <input id="velocity" name="velocity" type="number" placeholder="miles per hour">
       </div>
-      <input type="submit" value="Submit">
-      <input type="button" id="settings" class="settings" value="Apply Configurations">
+      <input id="submit" type="button" value="Apply Configurations">
+      <!-- do not set type to "submit" because the inherent HTTPS POST method refreshes the page
+            and refreshing the page automatically deletes any other edits previously made -->
     </form>
     <div>
-      <button type=button id="startBtn" class="start">Start Spinning</button>
-      <button id="stopBtn">Stop Spinning</button>
+      <button type="button" id="startBtn" disabled>Start Spinning</button>
+      <button type="button" id="stopBtn" disabled>Stop Spinning</button>
     </div>
     <img id="wheel" src="C:\Users\Ruiku\Desktop\Folders\Coding\GitHub\wheel_model\2006ToyotaCamryHubCap.png" alt="image didn't load">
     
